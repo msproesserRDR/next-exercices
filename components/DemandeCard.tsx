@@ -23,7 +23,10 @@ export default function DemandeCard({ id, qualification, dateCreation, statut, o
     return (
         <div className="rounded-lg border p-4 shadow-sm">
             <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold">{qualification}</h3>
+                <h3 className="text-lg font-semibold flex items-center gap-2">
+                    {statut === "En cours d'instruction" && <span className="inline-block w-3 h-3 rounded-full bg-red-500"></span>}
+                    {qualification}
+                </h3>
                 <span className="text-sm text-gray-400">#{numeroWeb}</span>
             </div>
             <p className="text-sm text-gray-500 mt-1">

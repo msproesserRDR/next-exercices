@@ -9,17 +9,20 @@ const qualificationLabels: Record<string, string> = {
     remboursement_soins_courants: "Remboursement soins courants",
     remboursement_autres: "Remboursement autres",
     remboursement_dentaire: "Remboursement dentaire",
+    devis_hospitalisation: "Devis hospitalisation",
 };
 
 export default function DemandesClient({ demandes }: { demandes: DemandeAPI[] }) {
     const [filtre, setFiltre] = useState("Toutes");
 
-    const filtres = ["Toutes", "Dossier traité", "Dossier traité, virement à venir", "Inconnu"];
+    const filtres = ["Toutes", "En cours", "Clôturées"];
 
     const demandesFiltrees =
         filtre === "Toutes"
             ? demandes
-            : demandes.filter((d) => d.statut === filtre);
+            : filtre === "En cours"
+                ? demandes.filter((d) => d.statut === "En cours d'instruction")
+                : demandes.filter((d) => d.statut !== "En cours d'instruction");
 
     return (
         <div>
